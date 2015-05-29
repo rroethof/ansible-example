@@ -3,7 +3,7 @@
   apt: pkg=zsh state=latest
 
 - name: placing .z files
-  copy: src={{ item }} dest=/home/haraldvdlaan mode=0644 owner=haraldvdlaan group=haraldvdlaan force=no
+  copy: src={{ item }} dest=/home/{{ r_user}}  mode=0644 owner={{ r_user }} group={{ r_group }} force=no
   with_items:
     - .zaliasses
     - .zcolors
@@ -13,4 +13,4 @@
     - .zshrc
 
 - name: changing usershell to zsh
-  user: name=haraldvdlaan shell=/usr/bin/zsh
+  user: name={{ r_user }} shell=/usr/bin/zsh

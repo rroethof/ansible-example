@@ -2,5 +2,9 @@
 - hosts: localhost
   sudo: true
 
+  vars:
+    - r_user: "user"
+    - r_group: "group"
+
   roles:
     - ansible-zsh
