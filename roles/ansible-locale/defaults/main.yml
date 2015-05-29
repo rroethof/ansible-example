@@ -1,0 +1,12 @@
+---
+locale_locales:
+  - { locale: en_US.UTF-8, state: present }
+  - { locale: nl_NL.UTF-8, state: present }
+
+locale_language_packs:
+  - language-pack-en
+  - language-pack-en-base
+  - language-pack-nl
+  - language-pack-nl-base
+
+locale_config_path: /var/lib/locales/supported.d/local

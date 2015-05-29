@@ -1,0 +1,20 @@
+---
+- name: ensure locales is installed
+  apt: name=locales state=latest update_cache=true cache_valid_time=86400
+
+- name: ensure language packages are installed
+  apt: name={{ item }} state=latest update_cache=true cache_valid_time=86400
+  with_items: locale_language_packs
+  register: locale_language
+
+- name: ensure locales are reconfigured
+  command: dpkg-reconfigure loacles
+  when: locale_language.changed
+
+- name: ensure locale configuration file is created
+  file: path={{ locale_config_path }} state=touch
+  when: not locale_configuration.stat.exists
+
+- name: ensure the system locale is configured
+  local_gen: name={{ item.locale }} state={{ item.state }}
+  with_items: locale_locales

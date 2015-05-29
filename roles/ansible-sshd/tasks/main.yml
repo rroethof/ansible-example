@@ -1,0 +1,16 @@
+---
+- name: debian - ensure sshd is installed
+  apt: name=openssh-server state=latest update_cache=true cache_valid_time=86400
+  when: ansible_os_family == 'Debian'
+
+- name: rhel - ensure sshd is installed
+  yum: name=openssh-server state=latest update_cache=true
+  when: ansible_os_family == 'RedHat'
+
+- name: ensure sshd_config is managed
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0644
+  notify:
+    - restart sshd
+
+- name: ensure sshd is running and enabled
+  service: name=sshd state=started enabled=true

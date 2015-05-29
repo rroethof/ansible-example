@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  sudo: true
+  
+  vars:
+    monit_start_delay: 0
+    
+    monit_process_list:
+      - process: "ssh"
+        pid_path: "/var/run/sshd.pid"
+  
+  roles:
+    - ansible-monit

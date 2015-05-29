@@ -1,0 +1,16 @@
+---
+- name: installing required packages
+  apt: pkg=zsh state=latest
+
+- name: placing .z files
+  copy: src={{ item }} dest=/home/haraldvdlaan mode=0644 owner=haraldvdlaan group=haraldvdlaan force=no
+  with_items:
+    - .zaliasses
+    - .zcolors
+    - .zcompdump
+    - .zfunctions
+    - .zprompt
+    - .zshrc
+
+- name: changing usershell to zsh
+  user: name=haraldvdlaan shell=/usr/bin/zsh

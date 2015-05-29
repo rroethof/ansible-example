@@ -1,0 +1,17 @@
+# roles/motd/tasks/main.yml
+#
+# This ansible role will deploy a generated motd on ubuntu
+---
+- name: remove old motd files
+  file: path=/etc/update-motd.d/{{ item }} state=absent
+  with_items:
+    - 00-header
+    - 10-help-text
+    - 50-landscape-sysinfo
+    - 90-updates-available
+    - 91-release-upgrade
+    - 98-fsck-at-reboot
+    - 98-reboot-required
+
+- name: update motd to generated version
+  template: src=motd.j2 dest=/etc/motd owner=root group=root mode=0644
