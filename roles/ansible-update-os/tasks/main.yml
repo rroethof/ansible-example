@@ -1,0 +1,9 @@
+---
+- name: apt - update apt repository
+  apt: update_cache=true cache_valid_time=86400
+
+- name: apt - installing aptitude for safe upgrade
+  apt: name=aptitude state=latest
+
+- name: apt - upgrade os
+  apt: upgrade=safe
