@@ -16,5 +16,5 @@
   when: not locale_configuration.stat.exists
 
 - name: ensure the system locale is configured
-  local_gen: name={{ item.locale }} state={{ item.state }}
+  locale_gen: name={{ item.locale }} state={{ item.state }}
   with_items: locale_locales
