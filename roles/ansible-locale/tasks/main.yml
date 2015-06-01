@@ -8,7 +8,7 @@
   register: locale_language
 
 - name: ensure locales are reconfigured
-  command: dpkg-reconfigure loacles
+  command: dpkg-reconfigure locales
   when: locale_language.changed
 
 - name: ensure locale configuration file is created
